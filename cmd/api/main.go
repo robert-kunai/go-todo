@@ -32,8 +32,9 @@ func main() {
 	router.HandleFunc("/tasks/{id}", taskHandler.UpdateTask).Methods("PUT")
 	router.HandleFunc("/tasks/{id}", taskHandler.DeleteTask).Methods("DELETE")
 
-	// Add middleware for logging
+	// Add middleware for logging and CORS
 	router.Use(loggingMiddleware)
+	router.Use(corsMiddleware)
 
 	// Create HTTP server
 	srv := &http.Server{
@@ -71,6 +72,24 @@ func main() {
 func loggingMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		log.Printf("%s %s %s", r.RemoteAddr, r.Method, r.URL)
+		next.ServeHTTP(w, r)
+	})
+}
+
+// corsMiddleware adds CORS headers to all responses
+func corsMiddleware(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		// Set CORS headers
+		w.Header().Set("Access-Control-Allow-Origin", "*") // In production, specify your domain
+		w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+		w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization")
+		
+		// Handle preflight requests
+		if r.Method == "OPTIONS" {
+			w.WriteHeader(http.StatusOK)
+			return
+		}
+		
 		next.ServeHTTP(w, r)
 	})
 }
