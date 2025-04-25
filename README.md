@@ -1,6 +1,69 @@
-# Todo List API
+# Todo List Application
 
-A simple RESTful API for managing todo tasks, built with Go.
+A simple Todo List application built with Go backend and Qwik.js frontend.
+
+## Project Structure
+
+- `cmd/api`: Contains the main Go application entry point
+- `internal`: Contains the internal Go packages
+  - `handlers`: HTTP request handlers
+  - `models`: Data models
+  - `repository`: Data storage
+- `web`: Qwik.js frontend application
+
+## Prerequisites
+
+- Go 1.21 or later
+- Node.js 18 or later
+- npm or yarn
+
+## Running the Application
+
+### Backend (Go API)
+
+1. Start the Go backend:
+
+```bash
+go run cmd/api/main.go
+```
+
+This will start the API server at `http://localhost:8080`.
+
+### Frontend (Qwik)
+
+1. Navigate to the web directory:
+
+```bash
+cd web
+```
+
+2. Install dependencies:
+
+```bash
+npm install
+```
+
+3. Start the development server:
+
+```bash
+npm run dev
+```
+
+This will start the Qwik dev server at `http://localhost:5173`.
+
+## API Endpoints
+
+- `GET /tasks`: Get all tasks
+- `GET /tasks/{id}`: Get a specific task
+- `POST /tasks`: Create a new task
+- `PUT /tasks/{id}`: Update a task
+- `DELETE /tasks/{id}`: Delete a task
+
+## Qwik Components
+
+- `TaskList`: Main component that displays and manages tasks
+- `TaskItem`: Component to display a single task
+- `TaskForm`: Component to add new tasks
 
 ## Features
 
@@ -10,46 +73,6 @@ A simple RESTful API for managing todo tasks, built with Go.
 - Proper error handling
 - Request logging
 
-## API Endpoints
-
-### Create a Task
-```
-POST /tasks
-Content-Type: application/json
-
-{
-    "title": "My Task",
-    "description": "Task description"
-}
-```
-
-### Get All Tasks
-```
-GET /tasks
-```
-
-### Get a Single Task
-```
-GET /tasks/{id}
-```
-
-### Update a Task
-```
-PUT /tasks/{id}
-Content-Type: application/json
-
-{
-    "title": "Updated Task",
-    "description": "Updated description",
-    "completed": true
-}
-```
-
-### Delete a Task
-```
-DELETE /tasks/{id}
-```
-
 ## Getting Started
 
 1. Clone the repository
@@ -57,31 +80,3 @@ DELETE /tasks/{id}
    ```bash
    go mod download
    ```
-3. Run the server:
-   ```bash
-   go run cmd/api/main.go
-   ```
-
-The server will start on port 8080.
-
-## Project Structure
-
-```
-.
-├── cmd/
-│   └── api/
-│       └── main.go
-├── internal/
-│   ├── handlers/
-│   │   └── task_handler.go
-│   ├── models/
-│   │   └── task.go
-│   └── repository/
-│       └── task_repository.go
-└── README.md
-```
-
-## Dependencies
-
-- [gorilla/mux](https://github.com/gorilla/mux) - HTTP router
-- [google/uuid](https://github.com/google/uuid) - UUID generation 
