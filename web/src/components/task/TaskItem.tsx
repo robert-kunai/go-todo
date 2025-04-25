@@ -46,19 +46,19 @@ export default component$<TaskItemProps>(
     });
 
     return (
-      <div class="border p-4 rounded-md mb-4 bg-white shadow-sm">
+      <div class="card mb-4">
         {isEditing.value ? (
-          <div class="space-y-2">
+          <div class="space-y-4">
             <input
               type="text"
-              class="border rounded p-2 w-full"
+              class="form-control"
               value={titleInput.value}
               onInput$={(e) =>
                 (titleInput.value = (e.target as HTMLInputElement).value)
               }
             />
             <textarea
-              class="border rounded p-2 w-full"
+              class="form-control"
               value={descriptionInput.value}
               onInput$={(e) =>
                 (descriptionInput.value = (
@@ -67,16 +67,10 @@ export default component$<TaskItemProps>(
               }
             />
             <div class="flex space-x-2">
-              <button
-                class="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
-                onClick$={handleSave}
-              >
+              <button class="btn btn-primary" onClick$={handleSave}>
                 Save
               </button>
-              <button
-                class="px-3 py-1 bg-gray-300 rounded hover:bg-gray-400"
-                onClick$={handleCancel}
-              >
+              <button class="btn btn-secondary" onClick$={handleCancel}>
                 Cancel
               </button>
             </div>
@@ -87,7 +81,7 @@ export default component$<TaskItemProps>(
               <input
                 type="checkbox"
                 checked={task.completed}
-                class="mr-2 h-5 w-5"
+                class="h-5 w-5 mr-2 text-primary-600 rounded"
                 onClick$={handleToggleComplete}
               />
               <h3
@@ -97,21 +91,15 @@ export default component$<TaskItemProps>(
               </h3>
             </div>
             <p
-              class={`text-gray-700 mb-3 ${task.completed ? "text-gray-400" : ""}`}
+              class={`mb-4 ${task.completed ? "text-gray-400" : "text-gray-700"}`}
             >
               {task.description}
             </p>
             <div class="flex space-x-2">
-              <button
-                class="px-3 py-1 bg-yellow-500 text-white rounded hover:bg-yellow-600"
-                onClick$={handleEdit}
-              >
+              <button class="btn btn-secondary" onClick$={handleEdit}>
                 Edit
               </button>
-              <button
-                class="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600"
-                onClick$={handleDelete}
-              >
+              <button class="btn btn-danger" onClick$={handleDelete}>
                 Delete
               </button>
             </div>

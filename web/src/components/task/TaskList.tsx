@@ -48,28 +48,33 @@ export default component$(() => {
 
   return (
     <div class="container mx-auto px-4 py-8 max-w-4xl">
-      <h1 class="text-3xl font-bold mb-8 text-center">Todo List App</h1>
+      <h1 class="text-3xl font-bold mb-8 text-center text-primary-800 text-shadow">
+        Todo List App
+      </h1>
 
       <TaskForm onTaskCreated$={handleTaskCreated} />
 
       {isLoading.value ? (
         <div class="flex justify-center my-12">
-          <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+          <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary-500"></div>
         </div>
       ) : error.value ? (
-        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg mb-4">
           {error.value}
         </div>
       ) : tasks.length === 0 ? (
-        <div class="text-center p-8 bg-gray-50 rounded-lg">
-          <p class="text-gray-600 text-lg">
+        <div class="card text-center p-8">
+          <p class="text-secondary-600 text-lg">
             No tasks yet. Add your first task above!
           </p>
         </div>
       ) : (
-        <div>
-          <h2 class="text-xl font-semibold mb-4">
-            Your Tasks ({tasks.length})
+        <div class="mt-8">
+          <h2 class="text-xl font-semibold mb-4 text-primary-700">
+            Your Tasks{" "}
+            <span class="bg-primary-100 text-primary-800 py-1 px-2 rounded-lg text-sm">
+              {tasks.length}
+            </span>
           </h2>
           <div>
             {tasks.map((task) => (
